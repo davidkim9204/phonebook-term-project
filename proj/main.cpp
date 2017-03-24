@@ -3,7 +3,7 @@
 #include <fstream>
 #include <stdlib.h>
 #include "Person.h"
-#include "PhoneBook.h"
+#include "Phonebook.h"
  
 using namespace std;
  
@@ -26,30 +26,65 @@ void readFromFile(string fname) {
  
     fin.close();
 }
+
+
+void show_menu(){
+	cout << "-----------------------" << endl;
+	cout << "   1 .add new_number" << endl;
+	cout << "   2. search number " << endl;
+	cout << "   3. print all number "<< endl;
+	cout << "   4. exit phone book " << endl;
+	cout << "-----------------------" << endl;
+}
+	
  
 int main(int argc, char** argv) {
     myBook = new PhoneBook();
  
     readFromFile("people.txt");
- 
-    list<Person> search;
-    search = myBook->searchByName("Jo");
-	cout << "Search by name containing 'Jo'" << endl;
-    list<Person>::iterator it;
-    for (it = search.begin(); it != search.end(); it++) {
-        cout << ((Person) (*it)).getFullName() << " -- " << ((Person) (*it)).getPhoneNumber() << endl;
-    }
- 
-    cout << endl;
-    search = myBook->searchByPhoneNumber("23");
-	cout << "Search by phone number containing '23'" << endl;
-    for (it = search.begin(); it != search.end(); it++) {
-        cout << ((Person) (*it)).getFullName() << " -- " << ((Person) (*it)).getPhoneNumber() << endl;
-    }
- 
-	cout << endl;
-	cout << "All people in my phone book:" << endl << endl;
-	myBook->listAllPeople();
- 
+ 	while(true){
+ 		int command;
+ 		show_menu();
+ 		cin >> command;
+ 		if(command == 1){
+ 			string name, number;
+ 			cout << " input name you want to add" << endl;
+ 			cin >> name;
+ 			cout << " input phone number" << endl;
+ 			cin >> number;
+ 			myBook->addPerson(name, number);
+ 		}
+ 		
+ 		else if(command == 2){
+	   		list<Person> search;
+	   		string input;
+		    list<Person>::iterator it;
+	   		char command;
+	   		cout << "input number or name you want to find" << endl;
+	   		command = cin.peek();
+	   		if(command <= '0' || command >= '9'){
+	   			cin >> input;
+			    search = myBook->searchByName(input);
+				cout << "Search by name containing "<< input << endl;
+			}
+			else{
+				cin >> input;
+	    		search = myBook->searchByPhoneNumber(input);
+				cout << "Search by phone number containing " << input << endl;
+			}
+	    	for (it = search.begin(); it != search.end(); it++) {
+	        	cout << ((Person) (*it)).getFullName() << " -- " << ((Person) 	(*it)).getPhoneNumber() << endl;
+	        }
+	    }
+	 
+		else if(command == 3){
+			cout << "All people in my phone book:" << endl << endl;
+			myBook->listAllPeople();
+		}
+		else if(command ==4){
+			myBook -> save_in_file("people.txt");
+			break;
+		}
+	}	 
     return 0;
 }

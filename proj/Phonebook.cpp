@@ -1,13 +1,26 @@
 #include <string>
 #include <list>
 #include <iostream>
+#include <fstream>
 #include "Person.h"
-#include "PhoneBook.h"
+#include "Phonebook.h"
  
 using namespace std;
  
 PhoneBook::PhoneBook() {    
     nr = 0;
+}
+
+void PhoneBook::save_in_file(string fname){
+	int n = 0;
+	list<Person>::iterator it;
+	ofstream fout(fname.c_str());
+	fout << nr << endl;
+	for(it = people.begin(); it != people.end(); ++it){
+		fout << ((Person) (*it)).getFullName()  << endl;
+		fout << ((Person) (*it)).getPhoneNumber() << endl; 
+	}
+	fout.close();
 }
  
 bool PhoneBook::addPerson(string name, string phone) {
