@@ -58,19 +58,18 @@ int main(int argc, char** argv) {
  		else if(command == 2){
 	   		list<Person> search;
 	   		string input;
+	   		int in;
 		    list<Person>::iterator it;
 	   		char command;
 	   		cout << "input number or name you want to find" << endl;
-	   		command = cin.peek();
-	   		if(command <= '0' || command >= '9'){
-	   			cin >> input;
-			    search = myBook->searchByName(input);
-				cout << "Search by name containing "<< input << endl;
-			}
-			else{
-				cin >> input;
+	   		cin >> input;
+	   		if(isdigit(input[0])){
 	    		search = myBook->searchByPhoneNumber(input);
 				cout << "Search by phone number containing " << input << endl;
+			}
+			else{
+			    search = myBook->searchByName(input);
+				cout << "Search by name containing "<< input << endl;
 			}
 	    	for (it = search.begin(); it != search.end(); it++) {
 	        	cout << ((Person) (*it)).getFullName() << " -- " << ((Person) 	(*it)).getPhoneNumber() << endl;
