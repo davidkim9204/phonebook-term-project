@@ -1,8 +1,8 @@
-11
+10
+3
+3
 Andrew John Luke
 +4451551515
-Ann
-156-123
 Bro Jack
 +1448887
 Bro Mark
@@ -19,5 +19,3 @@ Ray George
 1561556165555454
 asdf
 234-4231
-john
-1429-3123

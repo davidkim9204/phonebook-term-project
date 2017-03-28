@@ -30,7 +30,7 @@ void readFromFile(string fname) {
 
 void show_menu(){
 	cout << "-----------------------" << endl;
-	cout << "   1 .add new_number" << endl;
+	cout << "   1. add new_number" << endl;
 	cout << "   2. search number " << endl;
 	cout << "   3. print all number "<< endl;
 	cout << "   4. exit phone book " << endl;
