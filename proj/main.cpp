@@ -47,12 +47,24 @@ int main(int argc, char** argv) {
  		show_menu();
  		cin >> command;
  		if(command == 1){
+ 			int i = 0, verify = 1;
  			string name, number;
  			cout << " input name you want to add" << endl;
  			cin >> name;
  			cout << " input phone number" << endl;
  			cin >> number;
- 			myBook->addPerson(name, number);
+ 			while(i != number.length()){
+ 				if(!isdigit(number[i]) && number[i] != '-'){
+ 					cout << "sorry wrong Input!" <<endl;
+ 					verify = 0;
+ 					break;
+ 				}
+ 				i++;
+ 			}
+ 			if(verify ==  1){
+
+ 				myBook->addPerson(name, number);
+ 			}
  		}
  		
  		else if(command == 2){
